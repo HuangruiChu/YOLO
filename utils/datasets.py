@@ -62,7 +62,7 @@ def create_dataloader(path, imgsz, batch_size, stride, opt, hyp=None, augment=Fa
     #把dataset的数量减少！
     if opt.task=="test" and opt.test_amount!=0:
         dataset=dataset[:opt.test_amount]
-        print(len(dataset))
+    print(len(dataset))
     batch_size = min(batch_size, len(dataset))
     nw = min([os.cpu_count() // world_size, batch_size if batch_size > 1 else 0, workers])  # number of workers
     sampler = torch.utils.data.distributed.DistributedSampler(dataset) if rank != -1 else None
